@@ -1,12 +1,11 @@
 {
-    "display_name": "Mobile Expression",
-    "author": "YourName",
-    "version": "1.1.0",
+    "display_name": "Mobile Character Expressions",
+    "author": "tincansimagine",
+    "version": "1.0.0",
+    "description": "모바일 환경에서 캐릭터 표정을 메시지 블록 위에 표시합니다",
     "js": "index.js",
     "css": "style.css",
-    "description": "모바일에서 캐릭터 표정을 메시지 상단에 표시",
-    "homePage": "https://github.com/your-repo",
     "requires": [],
     "optional": [],
-    "loading_order": 20
+    "loading_order": 5
 }
