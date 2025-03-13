@@ -1,37 +1,32 @@
-/* PC 기본 스타일 유지 */
-#expression-wrapper {
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-    z-index: 1000;
-}
-
-/* 모바일 대응 미디어 쿼리 */
+/* 모바일 레이아웃 */
 @media (max-width: 768px) {
+    #expression-wrapper { display: none !important; }
+    
     .mes_block {
         position: relative;
-        padding-top: 120px;
+        padding-top: 80px !important;
     }
     
-    #expression-wrapper {
-        position: absolute;
-        top: 10px;
-        left: 50%;
+    .mobile-expression {
+        position: absolute !important;
+        top: 10px !important;
+        left: 50% !important;
         transform: translateX(-50%);
-        width: 100px;
-        height: 100px;
-        bottom: auto;
-    }
-    
-    .expression-holder {
-        width: 100% !important;
-        height: auto !important;
-        min-width: unset !important;
-    }
-    
-    #expression-image {
-        max-width: 80px;
-        max-height: 80px;
+        width: 70px !important;
+        height: 70px !important;
+        z-index: 500;
         border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
+    
+    .mobile-expression img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+}
+
+/* PC 레이아웃 유지 */
+@media (min-width: 769px) {
+    .mobile-expression { display: none !important; }
 }

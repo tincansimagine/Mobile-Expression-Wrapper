@@ -1,12 +1,12 @@
 {
-    "display_name": "Mobile Expression Wrapper",
-    "loading_order": 10,
-    "requires": [],
-    "optional": [],
+    "display_name": "Mobile Expression",
+    "author": "YourName",
+    "version": "1.1.0",
     "js": "index.js",
     "css": "style.css",
-    "author": "tincansimagine",
-    "version": "1.0.0",
-    "homePage": "hhttps://github.com/tincansimagine/Mobile-Expression-Wrapper",
-    "auto_update": true
+    "description": "모바일에서 캐릭터 표정을 메시지 상단에 표시",
+    "homePage": "https://github.com/your-repo",
+    "requires": [],
+    "optional": [],
+    "loading_order": 20
 }

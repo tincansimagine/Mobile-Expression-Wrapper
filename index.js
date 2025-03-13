@@ -1,38 +1,36 @@
-import { getContext } from '../../../extensions.js';
-
 export function modifyDOM() {
     const context = getContext();
-    const observer = new MutationObserver((mutations) => {
-        handleMobileLayout();
+    const originalWrapper = document.getElementById('expression-wrapper');
+
+    function injectExpression(mesBlock) {
+        if(!mesBlock) return;
+        
+        const clone = originalWrapper.cloneNode(true);
+        clone.id = '';
+        clone.className = 'mobile-expression';
+        
+        const existing = mesBlock.querySelector('.mobile-expression');
+        existing?.remove();
+        mesBlock.prepend(clone);
+    }
+
+    // 새 메시지 생성시 이벤트 핸들링
+    context.eventSource.on(context.event_types.MESSAGE_RECEIVED, (message) => {
+        const lastMessage = document.querySelector('.mes_block:last-child');
+        injectExpression(lastMessage);
     });
 
-    // DOM 변경 감지
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
-    // 초기 실행
-    handleMobileLayout();
-}
-
-function handleMobileLayout() {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const expressionWrapper = document.getElementById('expression-wrapper');
-    const mesBlocks = document.querySelectorAll('.mes_block');
-
-    mesBlocks.forEach(block => {
-        if (isMobile) {
-            const clone = expressionWrapper.cloneNode(true);
-            block.insertBefore(clone, block.firstChild);
-        } else {
-            const existingClone = block.querySelector('#expression-wrapper');
-            if (existingClone) existingClone.remove();
+    // 기존 메시지 처리
+    document.querySelectorAll('.mes_block').forEach(injectExpression);
+    
+    // 화면 크기 변경 감지
+    let isMobile = window.matchMedia('(max-width: 768px)').matches;
+    window.addEventListener('resize', () => {
+        const newIsMobile = window.matchMedia('(max-width: 768px)').matches;
+        if(isMobile !== newIsMobile) {
+            isMobile = newIsMobile;
+            document.querySelectorAll('.mobile-expression').forEach(el => el.remove());
+            if(newIsMobile) document.querySelectorAll('.mes_block').forEach(injectExpression);
         }
     });
 }
-
-// 창 크기 변경 이벤트 핸들러
-window.addEventListener('resize', () => {
-    handleMobileLayout();
-});
