@@ -1,32 +1,40 @@
-/* 모바일 레이아웃 */
+/* 모바일 환경 */
 @media (max-width: 768px) {
-    #expression-wrapper { display: none !important; }
-    
+    /* 메시지 블록 상단 여백 확보 */
     .mes_block {
         position: relative;
-        padding-top: 80px !important;
+        padding-top: 90px !important;
     }
     
-    .mobile-expression {
-        position: absolute !important;
-        top: 10px !important;
-        left: 50% !important;
+    /* 모바일용 표정 컨테이너 */
+    .mobile-expression-container {
+        position: absolute;
+        top: 5px;
+        left: 50%;
         transform: translateX(-50%);
-        width: 70px !important;
-        height: 70px !important;
-        z-index: 500;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        width: 80px;
+        height: 80px;
+        z-index: 10;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        background-color: rgba(30, 30, 30, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
     }
     
-    .mobile-expression img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover;
+    /* 모바일용 표정 이미지 */
+    .mobile-expression-img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
     }
 }
 
-/* PC 레이아웃 유지 */
+/* PC 환경에서는 모바일용 요소 숨김 */
 @media (min-width: 769px) {
-    .mobile-expression { display: none !important; }
+    .mobile-expression-container {
+        display: none !important;
+    }
 }
