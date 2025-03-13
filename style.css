@@ -1,43 +1,25 @@
-/* 모바일 환경 스타일 */
 @media (max-width: 768px) {
-    /* 원본 표정 숨기기 */
-    #expression-wrapper {
-        display: none !important;
-    }
-    
-    /* AI 메시지 블록 설정 */
-    .mes_block:has(.name_text:not(:contains('You'))) {
-        position: relative !important;
-        padding-top: 90px !important;
-    }
-    
-    /* 모바일용 표정 컨테이너 */
-    .mobile-expression-container {
+    .mobile-expression-wrapper {
         position: absolute !important;
         top: 5px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 70px !important;
-        height: 70px !important;
-        z-index: 999 !important; /* 높은 z-index 보장 */
-        border-radius: 8px !important;
-        overflow: visible !important; /* 변경: hidden → visible */
-        background-color: rgba(25, 25, 25, 0.2) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-
+        z-index: 999 !important;
+        width: auto !important;
+        height: auto !important;
     }
     
-    /* 모바일용 표정 이미지 */
-    .mobile-expression-img {
-        max-width: 100% !important;
-        max-height: 100% !important;
+    .mobile-expression-wrapper .expression-holder {
+        min-width: 80px !important;
+        min-height: 80px !important;
+        background-color: rgba(25, 25, 25, 0.2) !important;
+        border-radius: 8px !important;
+    }
+    
+    .mobile-expression-wrapper .expression {
         width: 100% !important;
         height: 100% !important;
         object-fit: contain !important;
-        display: block !important;
         opacity: 1 !important;
-        visibility: visible !important;
     }
 }

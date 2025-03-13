@@ -119,12 +119,41 @@ function addExpressionToMessage(messageBlock) {
     messageBlock.prepend(container);
 }
 
-// 메시지에서 표정 제거
-function removeExpressionFromMessage(messageBlock) {
-    const existing = messageBlock.querySelector('.mobile-expression-container');
-    if (existing) {
-        existing.remove();
-    }
+function addExpressionToMessage(messageBlock) {
+    // 기존 모바일 표정 제거
+    removeExpressionFromMessage(messageBlock);
+    
+    // 원본 표정 요소 참조
+    const originalExpression = document.getElementById('expression-image');
+    if (!originalExpression) return;
+    
+    // 정확한 HTML 구조 복제
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mobile-expression-wrapper';
+    
+    const holder = document.createElement('div');
+    holder.className = 'expression-holder';
+    holder.style.minWidth = '100px';
+    holder.style.minHeight = '100px';
+    
+    const header = document.createElement('div');
+    header.className = 'fa-solid fa-grip drag-grabber';
+    
+    const img = document.createElement('img');
+    img.className = 'expression';
+    img.src = originalExpression.src; // 정확한 소스 경로 사용
+    img.dataset.spriteFolderName = originalExpression.dataset.spriteFolderName;
+    img.dataset.expression = originalExpression.dataset.expression;
+    img.dataset.spriteFilename = originalExpression.dataset.spriteFilename;
+    img.title = originalExpression.title;
+    img.style.opacity = '1';
+    
+    holder.appendChild(header);
+    holder.appendChild(img);
+    wrapper.appendChild(holder);
+    
+    // 메시지 블록 상단에 추가
+    messageBlock.prepend(wrapper);
 }
 
 // 모든 표정 제거

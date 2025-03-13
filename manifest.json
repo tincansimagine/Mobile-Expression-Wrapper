@@ -1,7 +1,7 @@
 {
     "display_name": "Mobile Character Expressions",
     "author": "tincansimagine",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "모바일 환경에서 캐릭터 표정을 메시지 블록 위에 표시합니다",
     "js": "index.js",
     "css": "style.css",
