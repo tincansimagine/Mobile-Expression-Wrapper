@@ -75,50 +75,45 @@ function processLatestMessage() {
     }
 }
 
-// 메시지에 표정 추가
+// 메시지 블록에 표정 추가
 function addExpressionToMessage(messageBlock) {
-    // 이미 존재하는 표정 제거
+    // 이전 표정 제거
     removeExpressionFromMessage(messageBlock);
     
-    // 원본 표정 이미지 참조
+    // 원본 표정 참조
     const originalExpression = document.getElementById('expression-image');
     if (!originalExpression || !originalExpression.src) {
-        console.log('원본 표정 이미지를 찾을 수 없음');
+        console.error('원본 표정 이미지 찾을 수 없음');
         return;
     }
     
-    console.log('표정 이미지 URL:', originalExpression.src);
-    
-    // 새 컨테이너 생성
+    // 컨테이너 생성
     const container = document.createElement('div');
     container.className = 'mobile-expression-container';
+
+    container.style.border = '2px solid red';
     
-    // 이미지 생성
+    // 이미지 생성 및 속성 설정
     const img = document.createElement('img');
     img.className = 'mobile-expression-img';
-    img.src = originalExpression.src;
-    img.alt = 'Character expression';
     
-    // 디버깅 코드
-    img.onload = function() {
-        console.log('✅ 이미지 로딩 성공:', img.src);
-        img.style.opacity = '1';
-    };
+    // 절대 경로로 이미지 설정 (중요!)
+    const characterName = originalExpression.dataset.spriteFolderName;
+    const expressionName = originalExpression.dataset.expression || 'neutral';
     
-    img.onerror = function() {
-        console.error('❌ 이미지 로딩 실패:', img.src);
-        // 직접 경로 시도
-        const spriteName = originalExpression.dataset.expression || 'neutral';
-        const characterName = originalExpression.dataset.spriteFolderName;
-        if (characterName) {
-            img.src = `/characters/${characterName}/${spriteName}.png`;
-            console.log('대체 경로 시도:', img.src);
-        }
-    };
+    // 타임스탬프 추가로 캐싱 방지
+    const timestamp = new Date().getTime();
+    img.src = `/characters/${characterName}/${expressionName}.png?t=${timestamp}`;
     
-    // 디버깅용 스타일
-    container.style.border = '2px solid red';
-    img.style.opacity = '0.5';
+    img.alt = `${characterName} ${expressionName}`;
+    img.title = expressionName;
+    
+    // 디버깅용 콘솔 로그
+    console.log(`모바일 표정 추가: ${img.src}`);
+    
+    // 이벤트 핸들러
+    img.onload = () => console.log('✅ 이미지 로드 성공:', img.src);
+    img.onerror = () => console.error('❌ 이미지 로드 실패:', img.src);
     
     container.appendChild(img);
     messageBlock.prepend(container);
